@@ -245,7 +245,7 @@ const App: React.FC = () => {
               <div key={key} className="flex whitespace-nowrap shrink-0">
                 {[...Array(4)].map((_, i) => (
                   <span key={i} className="text-3xl md:text-7xl font-heading font-black px-8 flex items-center gap-4">
-                    SCOUTING REVOLUTIONIZED <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
+                    FIND THE SIGNAL FROM THE NOISE <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
                     DATA INTELLIGENCE <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
                     ZERO FRICTION <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
                   </span>
@@ -375,9 +375,8 @@ const App: React.FC = () => {
           </div>
           
           <div className="flex gap-6 md:gap-8 flex-wrap">
-            <a href="#" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">Twitter</a>
-            <a href="#" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">LinkedIn</a>
-            <a href="#" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">Instagram</a>
+            <a href="https://www.linkedin.com/company/profilerfootball" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">LinkedIn</a>
+            <a href="https://www.instagram.com/profilerfootball/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">Instagram</a>
           </div>
         </div>
       </footer>
