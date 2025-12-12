@@ -3,13 +3,13 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
+import { LucideIcon } from 'lucide-react';
 
 export interface Artist {
   id: string;
   name: string;
   genre: string;
-  image: string;
-  fallbackImage?: string;
+  icon: LucideIcon;
   day: string;
   description: string;
 }

@@ -6,7 +6,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Ticket, Globe, Zap, Database, MapPin, Menu, X, Users, Play, ChevronLeft, ChevronRight, Activity, Layers, Target, Phone, Mail, ClipboardList, Briefcase } from 'lucide-react';
+import { Ticket, Globe, Zap, Database, MapPin, Menu, X, Users, Play, ChevronLeft, ChevronRight, Activity, Layers, Target, Phone, Mail, ClipboardList, Briefcase, ScanEye, Network } from 'lucide-react';
 import FluidBackground from './components/FluidBackground';
 import GradientText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
@@ -14,14 +14,14 @@ import ArtistCard from './components/ArtistCard';
 import { Artist } from './types';
 
 // Profiler Data - Based on PDF Deck
+// Replaced images with Icons for a consistent "Tech/Dashboard" aesthetic
 const PERSONAS: Artist[] = [
   { 
     id: '1', 
     name: 'Scouts', 
     genre: 'Capture Talent', 
     day: 'ON THE FIELD', 
-    // Image: Moody stadium view from the stands/sideline - Focused on observation
-    image: 'https://images.unsplash.com/photo-1522778119026-d647f0565c6a?q=80&w=1200&auto=format&fit=crop',
+    icon: Target,
     description: `Your scouts didn't join the club to waste hours compiling reports after every match. They joined to capture talent while it's fresh.
 
 Profiler delivers the match sheet at the final whistle - they write observations, rate players, tag skills, check data fingerprints, drop video clips, add audio notes, flag interesting players, build their best XI, and update their watchlist.
@@ -33,8 +33,7 @@ Everything in one place. They lock in their insights while emotions are raw, not
     name: 'Data Analysts', 
     genre: 'Find Edges', 
     day: 'INTELLIGENCE', 
-    // Image: Dark abstract data/tech visualization
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop',
+    icon: Database,
     description: `Your analysts are hired to find competitive edges, not to spend days reconciling data sources.
     
 But before they can analyze anything, they need to unify Wyscout, Opta, SkillCorner, Impect, StatsBomb, etc - manually checking duplicates, matching player IDs, and standardizing formats.
@@ -46,8 +45,7 @@ Profiler eliminates that entire process. All your sources are unified in one pla
     name: 'Chief Scout', 
     genre: 'Full Visibility', 
     day: 'COORDINATION', 
-    // Image: Tactical board/Planning close-up - Focused on strategy
-    image: 'https://images.unsplash.com/photo-1517466787929-bc90951d6db0?q=80&w=1200&auto=format&fit=crop',
+    icon: Globe,
     description: `Chief scouts need to see the full picture instantly: who's tracking which player, what's the status of each file, where are the gaps, who's going to Norway this weekend...
 
 Instead, they chase updates through emails, WhatsApp and meetings, losing hours to coordination overhead.
@@ -59,8 +57,7 @@ Profiler gives them a single dashboard with complete visibility and smart alerts
     name: 'Decision Makers', 
     genre: 'Instant Clarity', 
     day: 'EXECUTION', 
-    // Image: Modern, dark architectural/executive vibe - Focused on big picture
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop',
+    icon: Briefcase,
     description: `Sporting directors can't wait for a scouting report or a data point on a player in their shortlist when transfer windows move in days. Incomplete information means decisions get delayed or made on instinct.
 
 Profiler delivers complete intelligence instantly: all sources unified, all context available, every metric at your fingertips.
@@ -428,20 +425,32 @@ const App: React.FC = () => {
                 <ChevronRight className="w-6 h-6" />
               </button>
 
-              {/* Image Side */}
-              <div className="w-full md:w-5/12 h-64 md:h-auto relative overflow-hidden bg-black">
+              {/* Icon/Graphic Side */}
+              <div className="w-full md:w-5/12 h-64 md:h-auto relative overflow-hidden bg-[#05051a] flex items-center justify-center">
+                 {/* Grid Pattern */}
+                <div className="absolute inset-0 opacity-20" 
+                    style={{ 
+                      backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
+                      backgroundSize: '40px 40px'
+                    }} 
+                />
+                
                 <AnimatePresence mode="wait">
-                  <motion.img 
+                  <motion.div
                     key={selectedPersona.id}
-                    // Direct src usage without fallback logic
-                    src={selectedPersona.image} 
-                    alt={selectedPersona.name} 
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="absolute inset-0 w-full h-full object-cover object-top opacity-80"
-                  />
+                    initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
+                    animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                    exit={{ opacity: 0, scale: 0.5, rotate: 20 }}
+                    transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
+                    className="relative z-10"
+                  >
+                     <div className="absolute inset-0 bg-[#ff0033] blur-[80px] opacity-20 rounded-full" />
+                     {/* Rendering the icon dynamically from the selected persona */}
+                     {(() => {
+                        const IconComponent = selectedPersona.icon;
+                        return <IconComponent className="w-32 h-32 md:w-48 md:h-48 text-white relative z-10" strokeWidth={1} />;
+                     })()}
+                  </motion.div>
                 </AnimatePresence>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a2a] via-transparent to-transparent md:bg-gradient-to-r" />
               </div>
