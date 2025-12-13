@@ -375,9 +375,8 @@ const App: React.FC = () => {
           </div>
           
           <div className="flex gap-6 md:gap-8 flex-wrap">
-            <a href="#" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">Twitter</a>
-            <a href="#" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">LinkedIn</a>
-            <a href="#" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">Instagram</a>
+            <a href="https://www.linkedin.com/company/profiler-football" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">LinkedIn</a>
+            <a href="https://www.instagram.com/profiler.football" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">Instagram</a>
           </div>
         </div>
       </footer>

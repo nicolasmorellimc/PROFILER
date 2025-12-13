@@ -108,14 +108,14 @@ const FluidBackground: React.FC = () => {
         style={{ transform: 'translateZ(0)' }}
       />
 
+      {/* TACTICAL LAYER: Restored to background position (before overlays) for subtlety */}
+      <TacticalBackground />
+
       {/* Static Grain Overlay - Adds texture to the flat colors */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.12] mix-blend-overlay pointer-events-none"></div>
       
       {/* Heavy Vignette to focus center */}
       <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#02020a]/40 to-[#000000]/90 pointer-events-none" />
-
-      {/* MOVED: Tactical Layer is now ON TOP of everything (Vignette & Grain) */}
-      <TacticalBackground />
     </div>
   );
 };
