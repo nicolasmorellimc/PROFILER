@@ -245,7 +245,7 @@ const App: React.FC = () => {
               <div key={key} className="flex whitespace-nowrap shrink-0">
                 {[...Array(4)].map((_, i) => (
                   <span key={i} className="text-3xl md:text-7xl font-heading font-black px-8 flex items-center gap-4">
-                    FIND THE SIGNAL FROM THE NOISE <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
+                    SCOUTING REVOLUTIONIZED <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
                     DATA INTELLIGENCE <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
                     ZERO FRICTION <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
                   </span>
@@ -289,12 +289,12 @@ const App: React.FC = () => {
                 One <br/> <GradientText text="PLATFORM" className="text-5xl md:text-7xl" />
               </h2>
               <p className="text-lg md:text-xl text-gray-200 mb-12 md:mb-16 font-light leading-relaxed drop-shadow-md max-w-2xl mx-auto">
-                Clubs drown in data but starve for insights. Profiler centralizes the entire workflow of your scouting team with all market data and turns it into a real competitive edge.
+                Clubs drown in data but starve for insights. Profiler acts as the intelligence layer for the providers you already subscribe to. We unify your existing data sources into one seamless workflow to turn raw information into a competitive edge.
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                 {[
-                  { icon: Database, title: 'Centralization', desc: 'Wyscout, Opta, SkillCorner, Statsbomb, Impect etc — all unified in one powerful platform.' },
+                  { icon: Database, title: 'Centralization', desc: 'Connect your existing accounts—Wyscout, Opta, SkillCorner, Statsbomb—unified in one powerful platform.' },
                   { icon: Globe, title: 'Global Intelligence', desc: 'Track every eligible player worldwide.' },
                   { icon: ClipboardList, title: 'Workflow Management', desc: 'Centralize the entire workflow of your scouting team from observation to signing.' },
                   { icon: Layers, title: 'Custom Recruitment', desc: 'Tailor every tool to match your club\'s DNA and tactical requirements.' },
@@ -375,8 +375,9 @@ const App: React.FC = () => {
           </div>
           
           <div className="flex gap-6 md:gap-8 flex-wrap">
-            <a href="https://www.linkedin.com/company/profilerfootball" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">LinkedIn</a>
-            <a href="https://www.instagram.com/profilerfootball/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">Instagram</a>
+            <a href="#" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">Twitter</a>
+            <a href="#" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">LinkedIn</a>
+            <a href="#" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">Instagram</a>
           </div>
         </div>
       </footer>
