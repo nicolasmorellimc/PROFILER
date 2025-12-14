@@ -245,9 +245,9 @@ const App: React.FC = () => {
               <div key={key} className="flex whitespace-nowrap shrink-0">
                 {[...Array(4)].map((_, i) => (
                   <span key={i} className="text-3xl md:text-7xl font-heading font-black px-8 flex items-center gap-4">
-                    SCOUTING REVOLUTIONIZED <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
-                    DATA INTELLIGENCE <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
-                    ZERO FRICTION <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
+                    LESS NOISE <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
+                    MORE SIGNAL <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
+                    ALL ACTION <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
                   </span>
                 ))}
               </div>
@@ -322,8 +322,8 @@ const App: React.FC = () => {
       <section id="contact" className="relative z-10 py-20 md:py-32 px-4 md:px-6 bg-black/40 backdrop-blur-lg">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-12 md:mb-16">
-             <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-6">
-               READY TO <span className="text-[#ff0033]">REVOLUTIONIZE</span>
+             <h2 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6 leading-tight">
+               Profiler doesn’t sell you another platform - we deliver <span className="text-[#ff0033]">real results</span>.
              </h2>
              <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto">
                Profiler doesn't cost—it multiplies your team's impact. Stop adding complexity. Start creating value.
