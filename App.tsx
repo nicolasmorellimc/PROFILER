@@ -234,7 +234,7 @@ const App: React.FC = () => {
           </div>
           <div className="flex gap-6 md:gap-8 flex-wrap">
             <a href="https://www.linkedin.com/company/profilerfootball/" target="_blank" className="text-gray-400 hover:text-white font-black uppercase text-xs tracking-[0.2em]">LinkedIn</a>
-            <a href="https://www.instagram.com/profilerfootball" target="_blank" className="text-gray-400 hover:text-white font-black uppercase text-xs tracking-[0.2em]">Instagram</a>
+            <a href="https://www.instagram.com/profiler_football/?hl=fr" target="_blank" className="text-gray-400 hover:text-white font-black uppercase text-xs tracking-[0.2em]">Instagram</a>
           </div>
         </div>
       </footer>
