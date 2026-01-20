@@ -41,7 +41,6 @@ const AIChat: React.FC = () => {
     setInput('');
     setIsLoading(true);
 
-    // Slight delay to allow state update to render before scrolling
     setTimeout(scrollToBottom, 100);
 
     const responseText = await sendMessageToGemini(input);
@@ -58,12 +57,12 @@ const AIChat: React.FC = () => {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="mb-4 w-[90vw] md:w-96 bg-[#05051a]/95 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl shadow-[#ff0033]/20"
+            className="mb-4 w-[90vw] md:w-96 bg-[#05051a]/95 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl shadow-[#ff007b]/20"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-900/50 to-black/50 p-4 flex justify-between items-center border-b border-white/10">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[#ff0033] animate-pulse" />
+                <Sparkles className="w-5 h-5 text-[#ff007b] animate-pulse" />
                 <h3 className="font-heading font-bold text-white tracking-wider">PROFILER AI</h3>
               </div>
               <button onClick={() => setIsOpen(false)} className="text-white/50 hover:text-white" data-hover="true">
@@ -84,7 +83,7 @@ const AIChat: React.FC = () => {
                   <div
                     className={`max-w-[85%] p-3 rounded-lg text-sm ${
                       msg.role === 'user'
-                        ? 'bg-[#ff0033] text-white rounded-tr-none'
+                        ? 'bg-[#ff007b] text-white rounded-tr-none'
                         : 'bg-white/10 text-gray-200 rounded-tl-none border border-white/5'
                     }`}
                   >
@@ -95,9 +94,9 @@ const AIChat: React.FC = () => {
               {isLoading && (
                 <div className="flex justify-start">
                   <div className="bg-white/10 p-3 rounded-lg rounded-tl-none flex gap-1">
-                    <span className="w-1.5 h-1.5 bg-[#ff0033] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <span className="w-1.5 h-1.5 bg-[#ff0033] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <span className="w-1.5 h-1.5 bg-[#ff0033] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <span className="w-1.5 h-1.5 bg-[#ff007b] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <span className="w-1.5 h-1.5 bg-[#ff007b] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <span className="w-1.5 h-1.5 bg-[#ff007b] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                   </div>
                 </div>
               )}
@@ -122,7 +121,7 @@ const AIChat: React.FC = () => {
                 <button
                   onClick={handleSend}
                   disabled={isLoading || !input.trim()}
-                  className="bg-[#ff0033] p-2 rounded-lg hover:bg-[#d50000] transition-colors disabled:opacity-50"
+                  className="bg-[#ff007b] p-2 rounded-lg hover:bg-[#d50066] transition-colors disabled:opacity-50"
                   data-hover="true"
                 >
                   <Send className="w-4 h-4 text-white" />
@@ -138,7 +137,7 @@ const AIChat: React.FC = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-tr from-[#ff0033] to-[#b71c1c] flex items-center justify-center shadow-lg shadow-[#ff0033]/40 border border-white/20 z-50 group"
+        className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-tr from-[#ff007b] to-[#b71c4c] flex items-center justify-center shadow-lg shadow-[#ff007b]/40 border border-white/20 z-50 group"
         data-hover="true"
       >
         {isOpen ? (

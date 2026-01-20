@@ -13,8 +13,19 @@ import CustomCursor from './components/CustomCursor';
 import ArtistCard from './components/ArtistCard';
 import { Artist } from './types';
 
-// Profiler Data - Based on PDF Deck
-// Replaced images with Icons for a consistent "Tech/Dashboard" aesthetic
+// Updated Logo Component with Magenta Hexagon
+const ProfilerLogo = ({ className = "w-10 h-10", color = "#ff007b" }) => (
+  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+    {/* Outer boundary */}
+    <path d="M50 5 L90 27.5 V72.5 L50 95 L10 72.5 V27.5 L50 5Z" stroke="white" strokeWidth="4" strokeLinejoin="round"/>
+    {/* Horizontal lines */}
+    <line x1="10" y1="50" x2="38" y2="50" stroke="white" strokeWidth="4"/>
+    <line x1="62" y1="50" x2="90" y2="50" stroke="white" strokeWidth="4"/>
+    {/* Central Hexagon replaces the circle */}
+    <path d="M50 38 L60.4 44 L60.4 56 L50 62 L39.6 56 L39.6 44 Z" fill={color} />
+  </svg>
+);
+
 const PERSONAS: Artist[] = [
   { 
     id: '1', 
@@ -73,7 +84,6 @@ const App: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedPersona, setSelectedPersona] = useState<Artist | null>(null);
   
-  // Handle keyboard navigation for modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!selectedPersona) return;
@@ -113,14 +123,15 @@ const App: React.FC = () => {
   };
   
   return (
-    <div className="relative min-h-screen text-white selection:bg-[#ff0033] selection:text-white cursor-auto md:cursor-none overflow-x-hidden">
+    <div className="relative min-h-screen text-white selection:bg-[#ff007b] selection:text-white cursor-auto md:cursor-none overflow-x-hidden font-sans">
       <CustomCursor />
       <FluidBackground />
       
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 md:px-8 py-6 mix-blend-normal bg-gradient-to-b from-black/80 to-transparent">
-        <div className="font-heading text-xl md:text-2xl font-bold tracking-tighter text-white cursor-default z-50 flex items-center gap-2">
-           <span className="text-[#ff0033]">●</span> PROFILER
+        <div className="text-xl md:text-2xl font-black tracking-tighter text-white cursor-default z-50 flex items-center gap-3">
+           <ProfilerLogo className="w-8 h-8 md:w-10 md:h-10" />
+           <span className="mt-1">PROFILER</span>
         </div>
         
         {/* Desktop Menu */}
@@ -129,7 +140,7 @@ const App: React.FC = () => {
             <button 
               key={item} 
               onClick={() => scrollToSection(item.toLowerCase())}
-              className="hover:text-[#ff0033] transition-colors text-white cursor-pointer bg-transparent border-none"
+              className="hover:text-[#ff007b] transition-colors text-white cursor-pointer bg-transparent border-none font-bold"
               data-hover="true"
             >
               {item}
@@ -166,7 +177,7 @@ const App: React.FC = () => {
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className="text-4xl font-heading font-bold text-white hover:text-[#ff0033] transition-colors uppercase bg-transparent border-none"
+                className="text-4xl font-black text-white hover:text-[#ff007b] transition-colors uppercase bg-transparent border-none"
               >
                 {item}
               </button>
@@ -182,35 +193,41 @@ const App: React.FC = () => {
       </AnimatePresence>
 
       {/* HERO SECTION */}
-      <header className="relative h-[100svh] min-h-[600px] flex flex-col items-center justify-center overflow-hidden px-4">
+      <header className="relative h-[100svh] min-h-[700px] flex flex-col items-center justify-center overflow-hidden px-4">
         <motion.div 
           style={{ y, opacity }}
           className="z-10 text-center flex flex-col items-center w-full max-w-7xl pb-24 md:pb-20"
         >
-           {/* Tagline */}
+          {/* Logo Animation */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="flex items-center gap-3 md:gap-6 text-xs md:text-sm font-mono text-gray-300 tracking-[0.2em] md:tracking-[0.3em] uppercase mb-4 bg-black/40 px-6 py-2 rounded-full backdrop-blur-sm border border-white/10"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="mb-12"
           >
-            <span>Clubs</span>
-            <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-[#ff0033] rounded-full animate-pulse"/>
-            <span>Federations</span>
+            <ProfilerLogo className="w-32 h-32 md:w-48 md:h-48 drop-shadow-[0_0_30px_rgba(255,0,123,0.3)]" />
           </motion.div>
 
-          {/* Main Title */}
-          <div className="relative w-full flex justify-center items-center">
+          {/* Main Title - Deck Styling */}
+          <div className="relative w-full flex flex-col justify-center items-center">
             <GradientText 
               text="PROFILER" 
               as="h1" 
-              className="text-[15vw] md:text-[14vw] leading-[0.9] font-black tracking-tighter text-center text-white" 
+              className="text-[16vw] md:text-[13vw] leading-[0.75] font-black tracking-tighter-custom text-center text-white uppercase" 
             />
-            {/* Optimized Orb */}
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="mt-6 text-2xl md:text-4xl font-black tracking-tight-custom text-white uppercase"
+            >
+              From data to decision.
+            </motion.p>
+            
             <motion.div 
-               className="absolute -z-20 w-[50vw] h-[50vw] bg-blue-900/10 blur-[60px] rounded-full pointer-events-none will-change-transform"
+               className="absolute -z-20 w-[60vw] h-[60vw] bg-[#ff007b]/10 blur-[80px] rounded-full pointer-events-none will-change-transform"
                animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.3, 0.5, 0.3] }}
-               transition={{ duration: 6, repeat: Infinity }}
+               transition={{ duration: 8, repeat: Infinity }}
                style={{ transform: 'translateZ(0)' }}
             />
           </div>
@@ -218,24 +235,22 @@ const App: React.FC = () => {
           <motion.div
              initial={{ scaleX: 0 }}
              animate={{ scaleX: 1 }}
-             transition={{ duration: 1.5, delay: 0.5, ease: "circOut" }}
-             className="w-full max-w-md h-px bg-gradient-to-r from-transparent via-[#ff0033]/50 to-transparent mt-4 md:mt-8 mb-6 md:mb-8"
+             transition={{ duration: 1.5, delay: 0.8, ease: "circOut" }}
+             className="w-full max-w-md h-px bg-gradient-to-r from-transparent via-[#ff007b]/50 to-transparent mt-8 mb-8"
           />
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 1 }}
-            className="text-lg md:text-2xl font-light max-w-2xl mx-auto text-gray-200 leading-relaxed drop-shadow-lg px-4"
+            transition={{ delay: 1, duration: 1 }}
+            className="text-lg md:text-xl font-medium max-w-3xl mx-auto text-gray-300 leading-relaxed drop-shadow-lg px-4"
           >
-            Every player. Every metric. <span className="text-white font-bold">One platform.</span>
-            <br/>
-            <span className="text-sm md:text-base text-gray-400 mt-2 block">Combine human expertise with data intelligence.</span>
+            A decision-support platform for professional football organizations.
           </motion.p>
         </motion.div>
 
         {/* MARQUEE */}
-        <div className="absolute bottom-12 md:bottom-16 left-0 w-full py-4 md:py-6 bg-white text-black z-20 overflow-hidden border-y-4 border-[#ff0033] shadow-[0_0_40px_rgba(255,0,51,0.2)]">
+        <div className="absolute bottom-12 md:bottom-16 left-0 w-full py-4 md:py-6 bg-white text-black z-20 overflow-hidden border-y-4 border-[#ff007b] shadow-[0_0_40px_rgba(255,0,123,0.2)]">
           <motion.div 
             className="flex w-fit will-change-transform"
             animate={{ x: "-50%" }}
@@ -243,11 +258,9 @@ const App: React.FC = () => {
           >
             {[0, 1].map((key) => (
               <div key={key} className="flex whitespace-nowrap shrink-0">
-                {[...Array(4)].map((_, i) => (
-                  <span key={i} className="text-3xl md:text-7xl font-heading font-black px-8 flex items-center gap-4">
-                    LESS NOISE <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
-                    MORE SIGNAL <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
-                    ALL ACTION <span className="text-[#ff0033] text-2xl md:text-4xl">●</span> 
+                {[...Array(6)].map((_, i) => (
+                  <span key={i} className="text-3xl md:text-6xl font-black px-8 flex items-center gap-4 uppercase tracking-tight">
+                    YOUR NEXT SIGNING STARTS HERE <span className="text-[#ff007b] text-2xl md:text-4xl">●</span> 
                   </span>
                 ))}
               </div>
@@ -256,15 +269,15 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      {/* PERSONAS SECTION (Formerly Lineup) */}
+      {/* PERSONAS SECTION */}
       <section id="roles" className="relative z-10 py-20 md:py-32">
         <div className="max-w-[1600px] mx-auto px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 px-4">
-             <h2 className="text-5xl md:text-7xl font-heading font-bold uppercase leading-[0.9] drop-shadow-lg break-words w-full md:w-auto">
+             <h2 className="text-5xl md:text-7xl font-black uppercase leading-[0.9] tracking-tighter-custom drop-shadow-lg break-words w-full md:w-auto">
               Every Role <br/> 
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Empowered</span>
             </h2>
-            <p className="text-gray-400 max-w-md text-right mt-4 md:mt-0 font-mono text-xs md:text-sm">
+            <p className="text-gray-400 max-w-md text-right mt-4 md:mt-0 font-mono text-xs md:text-sm uppercase tracking-tight">
               Click a role to see how Profiler transforms the workflow.
             </p>
           </div>
@@ -277,19 +290,18 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* PLATFORM SECTION (Formerly Experience) */}
+      {/* PLATFORM SECTION */}
       <section id="platform" className="relative z-10 py-20 md:py-32 bg-black/20 backdrop-blur-sm border-t border-white/10 overflow-hidden">
-        {/* Decorative blurred circle */}
-        <div className="absolute top-1/2 right-[-20%] w-[50vw] h-[50vw] bg-[#1a237e]/20 rounded-full blur-[60px] pointer-events-none will-change-transform" style={{ transform: 'translateZ(0)' }} />
+        <div className="absolute top-1/2 right-[-20%] w-[50vw] h-[50vw] bg-[#ff007b]/10 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 md:px-6 relative">
           <div className="flex flex-col items-center">
             <div className="max-w-4xl w-full text-center">
-              <h2 className="text-4xl md:text-6xl font-heading font-bold mb-6 md:mb-8 leading-tight">
-                One <br/> <GradientText text="PLATFORM" className="text-5xl md:text-7xl" />
+              <h2 className="text-4xl md:text-6xl font-black mb-6 md:mb-8 leading-tight uppercase tracking-tighter-custom">
+                One <br/> <GradientText text="PLATFORM" className="text-5xl md:text-7xl uppercase" />
               </h2>
               <p className="text-lg md:text-xl text-gray-200 mb-12 md:mb-16 font-light leading-relaxed drop-shadow-md max-w-2xl mx-auto">
-                Clubs drown in data but starve for insights. Profiler acts as the intelligence layer for the providers you already subscribe to. We unify your existing data sources into one seamless workflow to turn raw information into a competitive edge.
+                Clubs drown in data but starve for insights. Profiler acts as the intelligence layer for the providers you already subscribe to. We unify your existing data sources into one seamless workflow.
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
@@ -301,14 +313,14 @@ const App: React.FC = () => {
                 ].map((feature, i) => (
                   <div
                     key={i} 
-                    className="flex items-start gap-6 p-6 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-colors"
+                    className="flex items-start gap-6 p-6 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#ff007b]/30 transition-colors"
                   >
                     <div className="p-4 rounded-2xl bg-[#05051a] border border-white/10 shrink-0">
-                      <feature.icon className="w-6 h-6 text-[#ff0033]" />
+                      <feature.icon className="w-6 h-6 text-[#ff007b]" />
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold mb-2 font-heading">{feature.title}</h4>
-                      <p className="text-sm text-gray-300 leading-relaxed">{feature.desc}</p>
+                      <h4 className="text-xl font-black mb-2 uppercase tracking-tight">{feature.title}</h4>
+                      <p className="text-sm text-gray-300 leading-relaxed font-medium">{feature.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -318,35 +330,35 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* CONTACT SECTION (Formerly Tickets) */}
+      {/* CONTACT SECTION */}
       <section id="contact" className="relative z-10 py-20 md:py-32 px-4 md:px-6 bg-black/40 backdrop-blur-lg">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-12 md:mb-16">
-             <h2 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6 leading-tight">
-               Profiler doesn’t sell you another platform - we deliver <span className="text-[#ff0033]">real results</span>.
+             <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-tight tracking-tighter-custom">
+               Profiler doesn’t sell you another platform - we deliver <span className="text-[#ff007b]">real results</span>.
              </h2>
-             <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto">
+             <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto font-medium">
                Profiler doesn't cost—it multiplies your team's impact. Stop adding complexity. Start creating value.
              </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
             <motion.div
-              whileHover={{ y: -5 }}
-              className="p-8 border border-white/10 bg-white/5 backdrop-blur-md rounded-lg flex flex-col items-center justify-center gap-4"
+              whileHover={{ y: -5, borderColor: '#ff007b' }}
+              className="p-8 border border-white/10 bg-white/5 backdrop-blur-md rounded-lg flex flex-col items-center justify-center gap-4 transition-colors"
             >
-              <Phone className="w-10 h-10 text-[#ff0033]" />
-              <h3 className="text-xl font-bold uppercase">Call Us</h3>
+              <Phone className="w-10 h-10 text-[#ff007b]" />
+              <h3 className="text-xl font-black uppercase tracking-tight">Call Us</h3>
               <p className="text-xl font-mono">+33 661 633 038</p>
             </motion.div>
             
             <motion.div
-              whileHover={{ y: -5 }}
-              className="p-8 border border-white/10 bg-white/5 backdrop-blur-md rounded-lg flex flex-col items-center justify-center gap-4"
+              whileHover={{ y: -5, borderColor: '#ff007b' }}
+              className="p-8 border border-white/10 bg-white/5 backdrop-blur-md rounded-lg flex flex-col items-center justify-center gap-4 transition-colors"
             >
-              <Mail className="w-10 h-10 text-[#ff0033]" />
-              <h3 className="text-xl font-bold uppercase">Email Us</h3>
-              <a href="mailto:nicolas@profilerfootball.com" className="text-xl font-mono hover:text-[#ff0033] transition-colors">
+              <Mail className="w-10 h-10 text-[#ff007b]" />
+              <h3 className="text-xl font-black uppercase tracking-tight">Email Us</h3>
+              <a href="mailto:nicolas@profilerfootball.com" className="text-xl font-mono hover:text-[#ff007b] transition-colors">
                 nicolas@profilerfootball.com
               </a>
             </motion.div>
@@ -356,7 +368,7 @@ const App: React.FC = () => {
             href="mailto:nicolas@profilerfootball.com"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block mt-16 px-12 py-5 bg-[#ff0033] text-white font-bold text-lg tracking-widest uppercase rounded hover:bg-[#d50000] transition-colors shadow-[0_0_20px_rgba(255,0,51,0.4)]"
+            className="inline-block mt-16 px-12 py-5 bg-[#ff007b] text-white font-black text-lg tracking-widest uppercase rounded hover:bg-[#d50066] transition-colors shadow-[0_0_20px_rgba(255,0,123,0.4)]"
           >
             Schedule Demo
           </motion.a>
@@ -366,8 +378,9 @@ const App: React.FC = () => {
       <footer className="relative z-10 border-t border-white/10 py-12 md:py-16 bg-[#020210]">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
           <div>
-             <div className="font-heading text-3xl md:text-4xl font-bold tracking-tighter mb-4 text-white flex items-center gap-2">
-              <span className="text-[#ff0033]">●</span> PROFILER
+             <div className="text-3xl md:text-4xl font-black tracking-tighter mb-4 text-white flex items-center gap-3">
+              <ProfilerLogo className="w-10 h-10" />
+              <span className="mt-1">PROFILER</span>
              </div>
              <div className="flex gap-2 text-xs font-mono text-gray-500">
                <span>© 2025 Profiler Football. All rights reserved.</span>
@@ -375,8 +388,8 @@ const App: React.FC = () => {
           </div>
           
           <div className="flex gap-6 md:gap-8 flex-wrap">
-            <a href="https://www.linkedin.com/company/profilerfootball/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">LinkedIn</a>
-            <a href="https://www.instagram.com/profilerfootball" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors">Instagram</a>
+            <a href="https://www.linkedin.com/company/profilerfootball/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white font-black uppercase text-xs tracking-[0.2em] transition-colors">LinkedIn</a>
+            <a href="https://www.instagram.com/profilerfootball" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white font-black uppercase text-xs tracking-[0.2em] transition-colors">Instagram</a>
           </div>
         </div>
       </footer>
@@ -396,9 +409,8 @@ const App: React.FC = () => {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-6xl bg-[#0a0a2a] border border-white/10 overflow-hidden flex flex-col md:flex-row shadow-2xl shadow-[#ff0033]/10 group/modal max-h-[90vh]"
+              className="relative w-full max-w-6xl bg-[#0a0a2a] border border-white/10 overflow-hidden flex flex-col md:flex-row shadow-2xl shadow-[#ff007b]/10 group/modal max-h-[90vh]"
             >
-              {/* Close Button */}
               <button
                 onClick={() => setSelectedPersona(null)}
                 className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 text-white hover:bg-white hover:text-black transition-colors"
@@ -407,7 +419,6 @@ const App: React.FC = () => {
                 <X className="w-6 h-6" />
               </button>
 
-              {/* Navigation Buttons */}
               <button
                 onClick={(e) => { e.stopPropagation(); navigatePersona('prev'); }}
                 className="absolute left-4 bottom-4 translate-y-0 md:top-1/2 md:bottom-auto md:-translate-y-1/2 z-20 p-3 rounded-full bg-black/50 text-white hover:bg-white hover:text-black transition-colors border border-white/10 backdrop-blur-sm"
@@ -424,9 +435,7 @@ const App: React.FC = () => {
                 <ChevronRight className="w-6 h-6" />
               </button>
 
-              {/* Icon/Graphic Side */}
               <div className="w-full md:w-5/12 h-64 md:h-auto relative overflow-hidden bg-[#05051a] flex items-center justify-center">
-                 {/* Grid Pattern */}
                 <div className="absolute inset-0 opacity-20" 
                     style={{ 
                       backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
@@ -437,14 +446,13 @@ const App: React.FC = () => {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={selectedPersona.id}
-                    initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
-                    animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                    exit={{ opacity: 0, scale: 0.5, rotate: 20 }}
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.5 }}
                     transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
                     className="relative z-10"
                   >
-                     <div className="absolute inset-0 bg-[#ff0033] blur-[80px] opacity-20 rounded-full" />
-                     {/* Rendering the icon dynamically from the selected persona */}
+                     <div className="absolute inset-0 bg-[#ff007b] blur-[80px] opacity-20 rounded-full" />
                      {(() => {
                         const IconComponent = selectedPersona.icon;
                         return <IconComponent className="w-32 h-32 md:w-48 md:h-48 text-white relative z-10" strokeWidth={1} />;
@@ -454,7 +462,6 @@ const App: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a2a] via-transparent to-transparent md:bg-gradient-to-r" />
               </div>
 
-              {/* Content Side */}
               <div className="w-full md:w-7/12 p-8 pb-24 md:p-16 flex flex-col justify-center relative overflow-y-auto">
                 <motion.div
                   key={selectedPersona.id}
@@ -462,22 +469,22 @@ const App: React.FC = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: 0.1 }}
                 >
-                  <div className="flex items-center gap-3 text-[#ff0033] mb-6">
+                  <div className="flex items-center gap-3 text-[#ff007b] mb-6">
                      <Target className="w-5 h-5" />
-                     <span className="font-mono text-sm tracking-widest uppercase">{selectedPersona.day}</span>
+                     <span className="font-mono text-sm tracking-widest uppercase font-bold">{selectedPersona.day}</span>
                   </div>
                   
-                  <h3 className="text-4xl md:text-5xl font-heading font-bold uppercase leading-none mb-4 text-white">
+                  <h3 className="text-4xl md:text-5xl font-black uppercase leading-none mb-4 text-white tracking-tighter-custom">
                     {selectedPersona.name}
                   </h3>
                   
-                  <p className="text-xl text-gray-400 font-medium tracking-wider uppercase mb-8 flex items-center gap-2">
+                  <p className="text-xl text-gray-400 font-black tracking-wider uppercase mb-8 flex items-center gap-2">
                     <Activity className="w-5 h-5" /> {selectedPersona.genre}
                   </p>
                   
-                  <div className="h-px w-20 bg-[#ff0033] mb-8" />
+                  <div className="h-px w-20 bg-[#ff007b] mb-8" />
                   
-                  <div className="text-gray-300 leading-relaxed text-lg font-light space-y-4 whitespace-pre-wrap">
+                  <div className="text-gray-300 leading-relaxed text-lg font-medium space-y-4 whitespace-pre-wrap">
                     {selectedPersona.description}
                   </div>
                 </motion.div>

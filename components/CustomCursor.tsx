@@ -37,23 +37,25 @@ const CustomCursor: React.FC = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 z-[9999] pointer-events-none mix-blend-difference flex items-center justify-center hidden md:flex will-change-transform"
+      className="fixed top-0 left-0 z-[9999] pointer-events-none flex items-center justify-center hidden md:flex will-change-transform"
       style={{ x, y, translateX: '-50%', translateY: '-50%' }}
     >
-      {/* This div is the actual cursor "body" and will handle the scaling and text centering */}
-      {/* Changed base size to 80px diameter (40px radius) */}
+      {/* Hexagon Magenta Cursor Body */}
       <motion.div
-        className="relative rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.3)] flex items-center justify-center"
-        style={{ width: 80, height: 80 }}
+        className="relative bg-[#ff007b] shadow-[0_0_20px_rgba(255,0,123,0.5)] flex items-center justify-center"
+        style={{ 
+          width: 80, 
+          height: 80,
+          clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)'
+        }}
         animate={{
-          // Scaled by 1.5 to become 120px diameter (60px radius) when hovering
           scale: isHovering ? 1.5 : 1, 
         }}
         transition={{ type: "spring", stiffness: 300, damping: 25 }}
       >
-        {/* Text directly inside the scalable cursor body, centered by flex parent */}
+        {/* Text centered inside the hexagon */}
         <motion.span 
-          className="z-10 text-black font-black uppercase tracking-widest text-sm overflow-hidden whitespace-nowrap"
+          className="z-10 text-white font-black uppercase tracking-widest text-[10px] overflow-hidden whitespace-nowrap"
           initial={{ opacity: 0 }}
           animate={{ 
             opacity: isHovering ? 1 : 0,

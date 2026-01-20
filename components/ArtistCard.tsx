@@ -52,13 +52,13 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist, onClick }) => {
         </div>
 
         {/* Active State Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#ff0033]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#ff007b]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
 
       {/* Overlay Info */}
       <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between pointer-events-none">
         <div className="flex justify-between items-start">
-           <span className="text-xs font-mono border border-white/30 px-2 py-1 rounded-full backdrop-blur-md bg-black/50 text-gray-300 group-hover:border-[#ff0033]/50 group-hover:text-white transition-colors">
+           <span className="text-xs font-mono border border-white/30 px-2 py-1 rounded-full backdrop-blur-md bg-black/50 text-gray-300 group-hover:border-[#ff007b]/50 group-hover:text-white transition-colors">
              {artist.day}
            </span>
            <motion.div
@@ -66,7 +66,7 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist, onClick }) => {
                rest: { opacity: 0, x: 20, y: -20 },
                hover: { opacity: 1, x: 0, y: 0 }
              }}
-             className="bg-[#ff0033] text-white rounded-full p-2"
+             className="bg-[#ff007b] text-white rounded-full p-2"
            >
              <ArrowUpRight className="w-6 h-6" />
            </motion.div>
@@ -75,7 +75,7 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist, onClick }) => {
         <div>
           {/* Main Icon (Small visible version) */}
           <motion.div
-            className="mb-4 text-[#ff0033]"
+            className="mb-4 text-[#ff007b]"
             variants={{
               rest: { y: 20, opacity: 0 },
               hover: { y: 0, opacity: 1 }
