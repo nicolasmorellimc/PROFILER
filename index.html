@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PROFILER | Scouting Intelligence</title>
     
-    <!-- Favicon: Magenta Hexagon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 0 L93.3 25 V75 L50 100 L6.7 75 V25 Z' fill='%23ff007b' /></svg>">
+    <!-- Favicon: Magenta Hexagon (Base64 for better compatibility) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBkPSJNNTAgMCBMOTMuMyAyNSBWNzUgTDUwIDEwMCBMNi43IDc1IFYyNSBaIiBmaWxsPSIjZmYwMDdiIiAvPjwvc3ZnPg==">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+      /* Global Reset to Force Inter */
+      * {
+        font-family: 'Inter', sans-serif !important;
+      }
+
       html {
         scroll-behavior: smooth;
         scroll-padding-top: 100px;
@@ -25,15 +30,9 @@
       }
 
       body {
-        font-family: 'Inter', sans-serif;
         background-color: #02020a;
         color: #fff;
         overflow-x: hidden;
-      }
-      
-      /* Forcing Inter on everything to ensure "deck" look */
-      h1, h2, h3, h4, h5, h6, .font-heading, button, span, p, a {
-        font-family: 'Inter', sans-serif !important;
       }
 
       .tracking-tight-custom {
