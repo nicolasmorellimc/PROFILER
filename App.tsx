@@ -83,6 +83,18 @@ const App: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedPersona, setSelectedPersona] = useState<Artist | null>(null);
   
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (selectedPersona) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedPersona]);
+
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
     const element = document.getElementById(id);
@@ -242,18 +254,45 @@ const App: React.FC = () => {
       {/* Modal Persona */}
       <AnimatePresence>
         {selectedPersona && (
-          <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md" onClick={() => setSelectedPersona(null)}>
-            <motion.div initial={{ scale: 0.95, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, y: 20 }} onClick={(e) => e.stopPropagation()} className="relative w-full max-w-5xl bg-[#0a0a2a] border border-white/10 overflow-hidden flex flex-col md:flex-row shadow-2xl">
-              <button onClick={() => setSelectedPersona(null)} className="absolute top-4 right-4 z-20 p-2 text-white hover:text-[#ff007b]"><X className="w-8 h-8" /></button>
-              <div className="w-full md:w-5/12 h-64 md:h-auto bg-[#05051a] flex items-center justify-center relative">
-                <ProfilerLogo className="w-32 h-32 opacity-20 absolute" />
-                {React.createElement(selectedPersona.icon, { className: "w-32 h-32 md:w-48 md:h-48 text-white relative z-10", strokeWidth: 1 })}
+          <div 
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto" 
+            onClick={() => setSelectedPersona(null)}
+          >
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0, y: 20 }} 
+              animate={{ scale: 1, opacity: 1, y: 0 }} 
+              exit={{ scale: 0.95, opacity: 0, y: 20 }} 
+              onClick={(e) => e.stopPropagation()} 
+              className="relative w-full max-w-5xl bg-[#0a0a2a] border border-white/10 overflow-hidden flex flex-col md:flex-row shadow-2xl my-8 pointer-events-auto"
+            >
+              <button 
+                onClick={() => setSelectedPersona(null)} 
+                className="absolute top-4 right-4 z-30 p-2 text-white hover:text-[#ff007b] bg-black/20 rounded-full backdrop-blur-sm"
+              >
+                <X className="w-6 h-6 md:w-8 md:h-8" />
+              </button>
+
+              <div className="w-full md:w-5/12 h-48 md:h-auto bg-[#05051a] flex items-center justify-center relative shrink-0">
+                <ProfilerLogo className="w-24 h-24 md:w-32 md:h-32 opacity-20 absolute" />
+                {React.createElement(selectedPersona.icon, { 
+                  className: "w-24 h-24 md:w-48 md:h-48 text-white relative z-10", 
+                  strokeWidth: 1 
+                })}
               </div>
-              <div className="w-full md:w-7/12 p-8 md:p-16 flex flex-col justify-center">
-                <div className="text-[#ff007b] font-mono text-sm tracking-widest uppercase font-bold mb-4">{selectedPersona.day}</div>
-                <h3 className="text-4xl md:text-5xl font-black uppercase leading-none mb-4 text-white tracking-tighter-custom">{selectedPersona.name}</h3>
-                <p className="text-xl text-gray-400 font-black tracking-wider uppercase mb-8 flex items-center gap-2"><Activity className="w-5 h-5" /> {selectedPersona.genre}</p>
-                <div className="text-gray-300 leading-relaxed text-lg font-medium whitespace-pre-wrap">{selectedPersona.description}</div>
+
+              <div className="w-full md:w-7/12 p-6 md:p-16 flex flex-col justify-center overflow-y-visible">
+                <div className="text-[#ff007b] font-mono text-xs md:text-sm tracking-widest uppercase font-bold mb-4">
+                  {selectedPersona.day}
+                </div>
+                <h3 className="text-3xl md:text-5xl font-black uppercase leading-none mb-4 text-white tracking-tighter-custom">
+                  {selectedPersona.name}
+                </h3>
+                <p className="text-lg md:text-xl text-gray-400 font-black tracking-wider uppercase mb-6 md:mb-8 flex items-center gap-2">
+                  <Activity className="w-5 h-5" /> {selectedPersona.genre}
+                </p>
+                <div className="text-gray-300 leading-relaxed text-base md:text-lg font-medium whitespace-pre-wrap">
+                  {selectedPersona.description}
+                </div>
               </div>
             </motion.div>
           </div>
