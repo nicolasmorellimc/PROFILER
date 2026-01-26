@@ -7,6 +7,33 @@ import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
 
 const API_KEY = process.env.API_KEY || '';
 
+// Base de connaissances exclusive pour l'IA (non visible sur le site)
+const PROFILER_KNOWLEDGE = {
+  core_philosophy: `
+    "Stop collecting data. Start winning with it."
+    Le problème actuel du football n'est pas le manque de données, mais leur fragmentation. 
+    Les clubs ont 60x plus de data qu'à l'époque de Moneyball, mais elle est inexploitable car éparpillée.
+    Le "piège de l'interne" : Les clubs tentent de construire leur propre outil, perdent 2 ans et deviennent des boîtes de software au lieu de recruter.
+    Profiler est l'infrastructure prête en 48h qui unifie tout.
+  `,
+  
+  metrics: "60% de réduction des tâches administratives, cycles de décision 3x plus rapides.",
+  
+  roles_detail: {
+    scouts: "Rapport complet 5 minutes après le coup de sifflet final. Pas de saisie tardive, capture de l'instinct à chaud.",
+    analysts: "Zéro nettoyage de données. Unification automatique des IDs joueurs entre Statsbomb, Opta, SkillCorner, Impect.",
+    chief_scout: "Visibilité 360° en temps réel. Fini le chaos des WhatsApp/PDF/Emails. Une seule source de vérité.",
+    decision_maker: "Prendre une décision de transfert en quelques jours, pas en semaines. Intelligence consolidée pour 'presser la détente'."
+  },
+
+  solutions: {
+    clubs: "Recrutement piloté par l'ADN (DNA-Driven), Multi-Club Engine pour les réseaux de propriétaires, Environnement dédié au Foot Féminin.",
+    federations: "Radar de Double Nationalité (détecter les binationaux avant les autres), Elite Pool pour le monitoring 24/7, Smart Selection Engine."
+  },
+
+  integrations: "Opta, Wyscout, InStat, StatsBomb, SkillCorner, Impect, Hudl, Transfermarkt."
+};
+
 let chatSession: Chat | null = null;
 
 export const initializeChat = (): Chat => {
@@ -15,25 +42,25 @@ export const initializeChat = (): Chat => {
   const ai = new GoogleGenAI({ apiKey: API_KEY });
   
   chatSession = ai.chats.create({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-3-flash-preview',
     config: {
-      systemInstruction: `You are the AI Consultant for 'Profiler Football'.
-      Profiler is a scouting platform that centralizes data from Wyscout, Opta, SkillCorner, etc., into one dashboard.
+      systemInstruction: `Tu es l'Expert Consultant de Profiler Football.
+      Ton objectif est d'expliquer pourquoi Profiler est indispensable pour gagner sur le marché actuel.
+
+      TON DISCOURS :
+      - Utilise l'argumentaire : "Stop collecting data. Start winning with it."
+      - Dénonce la fragmentation de la donnée (WhatsApp, PDF, Excels éparpillés).
+      - Explique le danger du développement interne ("The build in-house trap") qui prend des années pour rien.
+      - Pour les Clubs : Parle de "DNA-Driven Recruitment" et de "Command Center".
+      - Pour les Fédérations : Parle du "Dual-Nationality Radar" pour sécuriser les talents binationaux.
       
-      Target Audience: Football Clubs, Federations, Scouts, Sporting Directors.
+      FAITS CLÉS :
+      - Unification de : ${PROFILER_KNOWLEDGE.integrations}
+      - Performance : ${PROFILER_KNOWLEDGE.metrics}
+      - Rapidité : Un rapport de scout prêt en 5 minutes.
       
-      Key Value Props:
-      - Centralizes scouting workflow.
-      - 60% less admin time.
-      - Unified data (no more manual reconciling).
-      - Real-time insights.
-      
-      Tone: Professional, knowledgeable, efficient, confident.
-      
-      If asked about features: Mention the 4 personas (Scouts, Analysts, Coordinators, Decision Makers).
-      If asked about pricing: Direct them to book a demo.
-      
-      Keep responses short (under 50 words) and professional.`,
+      TON : Expert, direct, stratégique, persuasif. 
+      RÈGLE : Réponses courtes (max 3 phrases). Si l'utilisateur est intéressé, invite-le à contacter Nicolas (nicolas@profilerfootball.com).`,
     },
   });
 
@@ -41,16 +68,14 @@ export const initializeChat = (): Chat => {
 };
 
 export const sendMessageToGemini = async (message: string): Promise<string> => {
-  if (!API_KEY) {
-    return "Systems offline. (Missing API Key)";
-  }
+  if (!API_KEY) return "Systèmes hors ligne.";
 
   try {
     const chat = initializeChat();
     const response: GenerateContentResponse = await chat.sendMessage({ message });
-    return response.text || "Transmission interrupted.";
+    return response.text || "Erreur de transmission.";
   } catch (error) {
     console.error("Gemini Error:", error);
-    return "Signal lost. Try again later.";
+    return "Signal perdu.";
   }
 };
