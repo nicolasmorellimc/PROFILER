@@ -3,13 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Target, Database, Globe, Briefcase, Activity, Layers, ClipboardList, Menu, X, Phone, Mail, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
+import { Target, Database, Globe, Briefcase, Activity, Layers, ClipboardList, Menu, X, Phone, Mail } from 'lucide-react';
 import FluidBackground from './components/FluidBackground';
 import GradientText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
 import ArtistCard from './components/ArtistCard';
+import AIChat from './components/AIChat';
 import { Artist } from './types';
 
 // Perfectly calculated hexagon paths
@@ -82,7 +83,7 @@ const App: React.FC = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedPersona, setSelectedPersona] = useState<Artist | null>(null);
-  
+
   // Prevent body scroll when modal is open
   useEffect(() => {
     if (selectedPersona) {
@@ -298,6 +299,8 @@ const App: React.FC = () => {
           </div>
         )}
       </AnimatePresence>
+
+      <AIChat />
     </div>
   );
 };
