@@ -11,6 +11,8 @@ import GradientText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
 import ArtistCard from './components/ArtistCard';
 import AIChat from './components/AIChat';
+import MediaCarousel from './components/MediaCarousel';
+import VideoShowcase from './components/VideoShowcase';
 import { Artist } from './types';
 
 const ProfilerLogo = ({ className = "w-10 h-10", color = "#ff007b" }) => (
@@ -120,13 +122,13 @@ const App: React.FC = () => {
         </button>
       </nav>
 
-      <header className="relative h-[100svh] min-h-[700px] flex flex-col items-center justify-center overflow-hidden px-4">
-        <motion.div style={{ y, opacity }} className="z-10 text-center flex flex-col items-center w-full max-w-7xl pb-24">
-          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2 }} className="mb-12">
+      <header className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 pt-20">
+        <motion.div style={{ y, opacity }} className="z-10 text-center flex flex-col items-center w-full max-w-7xl pb-10">
+          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2 }} className="mb-8">
             <ProfilerLogo className="w-32 h-32 md:w-48 md:h-48 drop-shadow-[0_0_30px_rgba(255,0,123,0.3)]" />
           </motion.div>
           <div className="relative w-full text-center">
-            <h1 className="text-[15vw] md:text-[12vw] leading-[0.8] font-black tracking-tighter-custom uppercase mb-8">
+            <h1 className="text-[15vw] md:text-[12vw] leading-[0.8] font-black tracking-tighter-custom uppercase mb-6">
               <GradientText text="PROFILER" />
             </h1>
             <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="text-xl md:text-3xl font-black tracking-tight text-white/80 uppercase">
@@ -135,7 +137,7 @@ const App: React.FC = () => {
           </div>
         </motion.div>
 
-        <div className="absolute bottom-12 left-0 w-full py-6 bg-white text-black z-20 overflow-hidden border-y-4 border-[#ff007b]">
+        <div className="absolute bottom-0 left-0 w-full py-6 bg-white text-black z-20 overflow-hidden border-y-4 border-[#ff007b]">
           <motion.div className="flex w-fit" animate={{ x: "-50%" }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }}>
             {[0, 1].map((key) => (
               <div key={key} className="flex whitespace-nowrap shrink-0">
@@ -149,6 +151,9 @@ const App: React.FC = () => {
           </motion.div>
         </div>
       </header>
+
+      {/* NEW VIDEO SHOWCASE - STANDALONE PLAYER */}
+      <VideoShowcase />
 
       {/* ONE PLATFORM SECTION */}
       <section id="platform" className="relative z-10 py-32 px-6">
@@ -183,6 +188,9 @@ const App: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* MEDIA CAROUSEL - VISUAL BREAK */}
+      <MediaCarousel />
 
       <section id="roles" className="relative z-10 py-20 md:py-32 border-t border-white/5">
         <div className="max-w-[1600px] mx-auto px-4 md:px-6">
