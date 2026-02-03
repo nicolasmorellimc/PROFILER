@@ -11,7 +11,7 @@ import GradientText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
 import ArtistCard from './components/ArtistCard';
 import AIChat from './components/AIChat';
-import VideoShowcase from './components/VideoShowcase';
+import TacticalActivity from './components/TacticalActivity';
 import { Artist } from './types';
 
 const ProfilerLogo = ({ className = "w-10 h-10", color = "#ff007b" }) => (
@@ -121,37 +121,18 @@ const App: React.FC = () => {
         </button>
       </nav>
 
-      <header className="relative h-[85vh] min-h-[600px] flex flex-col items-center justify-center overflow-hidden px-4 pt-16">
-        <motion.div style={{ y, opacity }} className="z-10 text-center flex flex-col items-center w-full max-w-7xl pb-0">
-          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2 }} className="mb-4">
-            <ProfilerLogo className="w-24 h-24 md:w-40 md:h-40 drop-shadow-[0_0_30px_rgba(255,0,123,0.3)]" />
-          </motion.div>
+      <header className="relative h-[50vh] min-h-[300px] flex flex-col items-center justify-center overflow-hidden px-4">
+        <motion.div style={{ y, opacity }} className="z-10 text-center flex flex-col items-center w-full max-w-7xl">
           <div className="relative w-full text-center">
-            <h1 className="text-[15vw] md:text-[11vw] leading-[0.8] font-black tracking-tighter-custom uppercase mb-4">
-              <GradientText text="PROFILER" />
-            </h1>
-            <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="text-lg md:text-2xl font-black tracking-tight text-white/80 uppercase">
-              The Command Center for Modern Recruitment.
+            <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="text-2xl md:text-4xl font-black tracking-tight text-white uppercase max-w-3xl mx-auto leading-tight">
+              The Command Center for <span className="text-[#ff007b]">Modern Recruitment.</span>
             </motion.p>
           </div>
         </motion.div>
-
-        <div className="absolute bottom-0 left-0 w-full py-4 bg-white text-black z-20 overflow-hidden border-y-4 border-[#ff007b]">
-          <motion.div className="flex w-fit" animate={{ x: "-50%" }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }}>
-            {[0, 1].map((key) => (
-              <div key={key} className="flex whitespace-nowrap shrink-0">
-                {[...Array(6)].map((_, i) => (
-                  <span key={i} className="text-2xl md:text-5xl font-black px-8 flex items-center gap-4 uppercase tracking-tight">
-                    YOUR NEXT SIGNING STARTS HERE <span className="text-[#ff007b] text-xl md:text-3xl">●</span> 
-                  </span>
-                ))}
-              </div>
-            ))}
-          </motion.div>
-        </div>
       </header>
 
-      <VideoShowcase />
+      {/* Activité tactique centrale */}
+      <TacticalActivity />
 
       {/* ONE PLATFORM SECTION */}
       <section id="platform" className="relative z-10 py-32 px-6">
