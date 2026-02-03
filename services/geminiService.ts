@@ -74,8 +74,9 @@ export const sendMessageToGemini = async (message: string): Promise<string> => {
     const chat = initializeChat();
     const response: GenerateContentResponse = await chat.sendMessage({ message });
     return response.text || "Erreur de transmission.";
-  } catch (error) {
-    console.error("Gemini Error:", error);
+  } catch (error: any) {
+    // Correction cyclique : On logue uniquement le message ou une chaîne simple
+    console.error("Gemini Error:", error?.message || "Internal AI Error");
     return "Signal perdu.";
   }
 };
