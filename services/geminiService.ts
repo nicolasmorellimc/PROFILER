@@ -5,8 +5,6 @@
 
 import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
 
-const API_KEY = process.env.API_KEY || '';
-
 // Base de connaissances exclusive pour l'IA (non visible sur le site)
 const PROFILER_KNOWLEDGE = {
   core_philosophy: `
@@ -36,10 +34,12 @@ const PROFILER_KNOWLEDGE = {
 
 let chatSession: Chat | null = null;
 
+// Initialize the chat session with strict API key usage and model configuration
 export const initializeChat = (): Chat => {
   if (chatSession) return chatSession;
 
-  const ai = new GoogleGenAI({ apiKey: API_KEY });
+  // Always use the process.env.API_KEY directly for initialization as per instructions
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
   chatSession = ai.chats.create({
     model: 'gemini-3-flash-preview',
@@ -67,15 +67,16 @@ export const initializeChat = (): Chat => {
   return chatSession;
 };
 
+// Send message and handle results using the SDK property access rules
 export const sendMessageToGemini = async (message: string): Promise<string> => {
-  if (!API_KEY) return "Systèmes hors ligne.";
-
   try {
     const chat = initializeChat();
-    const response: GenerateContentResponse = await chat.sendMessage({ message });
+    // Use sendMessage with proper parameters
+    const response: GenerateContentResponse = await chat.sendMessage({ message: message });
+    // Use the .text property (not a method) as specified in the guidelines
     return response.text || "Erreur de transmission.";
   } catch (error: any) {
-    // Correction cyclique : On logue uniquement le message ou une chaîne simple
+    // Basic error logging
     console.error("Gemini Error:", error?.message || "Internal AI Error");
     return "Signal perdu.";
   }
