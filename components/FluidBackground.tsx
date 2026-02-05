@@ -7,6 +7,7 @@
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import TacticalBackground from './TacticalBackground';
+import DataParticles from './DataParticles';
 
 const StarField = () => {
   const stars = useMemo(() => {
@@ -59,6 +60,9 @@ const FluidBackground: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-[#020210] via-[#010108] to-black opacity-90" />
       
       <StarField />
+      
+      {/* Interactive Data Particles */}
+      <DataParticles />
 
       {/* Blob 1: Profiler Vibrant Magenta */}
       <motion.div
