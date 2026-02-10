@@ -33,7 +33,7 @@ jobs:
       - name: Build
         run: npm run build
 
-              - name: Remove CNAME from dist
+      - name: Remove CNAME from dist
         run: rm -f dist/CNAME
         
       - name: Upload artifact
